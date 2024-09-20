@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: autotasks-workflow_configmap
+    namespace: autotasks_development
+data:
+    server_port: 8082

@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: autotasks-workflow_deployment
+    namespace: autotasks_development
+    labels:
+        app: workflow_service
+        env: development
+        tier: backend
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: workflow_service
+    strategy:
+        type: RollingUpdate
+        rollingUpdate:
+            maxSurge: 1
+    template:
+        metadata:
+            labels:
+                app: workflow_service
+        spec:
+            containers:
+                - name: autotasks-workflow_service
+                  image: jasoncrack/autotasks-workflow_service
+                  ports:
+                      - containerPort: 8082
+                  env:
+                      - name: SERVER_PORT
+                        valueFrom:
+                            configMapKeyRef:
+                                name: autotasks-workflow_configmap
+                                key: server_port
+                      - name: DB_URL_CONNECTION
+                        valueFrom:
+                            secretKeyRef:
+                                name: autotasks-workflow_secrets
+                                key: db_url_connection
+                      - name: DB_USERNAME
+                        valueFrom:
+                            secretKeyRef:
+                                name: autotasks-workflow_secrets
+                                key: db_username
+                      - name: DB_PASSWORD
+                        valueFrom:
+                            secretKeyRef:
+                                name: autotasks-workflow_secrets
+                                key: db_password
