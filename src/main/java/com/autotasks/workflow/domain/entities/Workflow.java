@@ -10,7 +10,7 @@ public class Workflow {
     private final WorkflowName name;
     private final WorkflowFolderId folderId;
     private final WorkflowDateCreated dateCreated;
-    private final boolean isActive;
+    private boolean isActive;
 
     public Workflow(
             WorkflowId id,
@@ -36,9 +36,7 @@ public class Workflow {
 
     public static Workflow create(
             WorkflowId id,
-            WorkflowName name,
-            WorkflowFolderId folderId
-    ) {
+            WorkflowName name, WorkflowFolderId folderId) {
         Workflow workflow = new Workflow(id, name, folderId, new WorkflowDateCreated(), true);
         return workflow;
     }
@@ -61,5 +59,9 @@ public class Workflow {
 
     public boolean isActive() {
         return isActive;
+    }
+
+    public void updateIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 }
