@@ -1,0 +1,9 @@
+FROM openjdk:17-jdk-alpine
+
+WORKDIR /usr/app
+
+COPY ../target/*.jar workflow_service.jar
+
+EXPOSE 8090
+
+ENTRYPOINT ["java", "-jar", "workflow_service.jar"]

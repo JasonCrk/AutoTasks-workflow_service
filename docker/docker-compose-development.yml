@@ -1,0 +1,27 @@
+services:
+    workflow_db:
+        container_name: autotasks_workflow_db
+        image: postgres:16.4-alpine3.20
+        ports:
+            - 5432:5432
+        environment:
+            POSTGRES_PASSWORD: workflow_db_password
+            POSTGRES_USER: postgres
+            POSTGRES_DB: workflow_service_db
+
+    workflow_service:
+        container_name: autotasks_workflow_service
+        build:
+            dockerfile: Dockerfile.dev
+            context: ..
+        depends_on:
+            - workflow_db
+        ports:
+            - 8090:8090
+        environment:
+            SERVER_PORT: 8090
+            DB_PORT: 5432
+            DB_HOST: workflow_db
+            DB_NAME: workflow_service_db
+            DB_USERNAME: postgres
+            DB_PASSWORD: workflow_db_password
