@@ -9,6 +9,9 @@ import com.autotasks.workflow.shared.domain.bus.query.QueryBus;
 import com.autotasks.workflow.shared.domain.exceptions.DomainError;
 import com.autotasks.workflow.shared.infrastructure.controllers.RestApiController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import jakarta.validation.Valid;
 
 import org.springframework.http.HttpStatus;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.UUID;
 
+@Tag(name = "PUTs")
 @RestController
 @RequestMapping("/api/v1/workflows")
 public class WorkflowPutRestController extends RestApiController {
@@ -26,6 +30,7 @@ public class WorkflowPutRestController extends RestApiController {
         super(queryBus, commandBus);
     }
 
+    @Operation(operationId = "Create a workflow")
     @PutMapping("/{id}")
     public ResponseEntity<String> create(
             @PathVariable("id") UUID id,

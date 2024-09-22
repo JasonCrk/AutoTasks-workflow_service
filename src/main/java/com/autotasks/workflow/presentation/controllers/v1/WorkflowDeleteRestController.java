@@ -8,6 +8,9 @@ import com.autotasks.workflow.shared.domain.bus.query.QueryBus;
 import com.autotasks.workflow.shared.domain.exceptions.DomainError;
 import com.autotasks.workflow.shared.infrastructure.controllers.RestApiController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.UUID;
 
+@Tag(name = "DELETEs")
 @RestController
 @RequestMapping("/api/v1/workflows")
 public class WorkflowDeleteRestController extends RestApiController {
@@ -26,6 +30,7 @@ public class WorkflowDeleteRestController extends RestApiController {
         super(queryBus, commandBus);
     }
 
+    @Operation(operationId = "Delete a workflow")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") UUID id) throws CommandHandlerExecutionError {
         this.dispatch(new DeleteWorkflowCommand(id.toString()));
