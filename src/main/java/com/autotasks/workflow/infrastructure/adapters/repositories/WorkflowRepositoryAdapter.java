@@ -12,6 +12,7 @@ import com.autotasks.workflow.shared.domain.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -30,5 +31,10 @@ public class WorkflowRepositoryAdapter implements WorkflowRepository {
     @Override
     public void deleteById(WorkflowId id) {
         this.repository.deleteById(UUID.fromString(id.value()));
+    }
+
+    @Override
+    public Optional<Workflow> findById(WorkflowId id) {
+        return this.repository.findById(UUID.fromString(id.value())).map(WorkflowMapper::modelToEntity);
     }
 }
