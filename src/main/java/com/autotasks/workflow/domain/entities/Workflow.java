@@ -8,7 +8,7 @@ import com.autotasks.workflow.domain.value_objects.WorkflowName;
 public class Workflow {
     private final WorkflowId id;
     private final WorkflowName name;
-    private final WorkflowFolderId folderId;
+    private WorkflowFolderId folderId;
     private final WorkflowDateCreated dateCreated;
     private boolean isActive;
 
@@ -63,5 +63,9 @@ public class Workflow {
 
     public void updateIsActive(boolean isActive) {
         this.isActive = isActive;
+    }
+
+    public void updateFolderId(WorkflowFolderId folderId) {
+        this.folderId = folderId;
     }
 }
