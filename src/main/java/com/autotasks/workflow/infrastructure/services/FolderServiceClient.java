@@ -10,5 +10,5 @@ import java.util.UUID;
 public interface FolderServiceClient {
 
     @GetMapping("/api/v1/folders/{id}/exists")
-    boolean existsById(@PathVariable("id") UUID id);
+    void existsById(@PathVariable("id") UUID id);
 }
